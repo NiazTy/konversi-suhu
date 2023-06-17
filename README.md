@@ -8,6 +8,11 @@ Konversi suhu ini merupakan sebuah pekerjaan rumah, yang dimana hal ini dapat me
 - UI yang nyaman dipandang dan ringan
 - Lainnya... 
 
+# Fitur Mendatang
+
+- Mengubah suhu ke kelvin
+- Memperbaiki UI agar lebih baik
+
 <div align="center">
   <h3>Made by</h3>
   
