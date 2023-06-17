@@ -65,9 +65,9 @@ p {
 }
 
 #title {
-    border: 2px solid orange;
+    border: 2px solid black;
     border-radius: 25% 10%;
-    background-color: orange;
+    background-color: black;
     font-weight: 600;
     color: aliceblue;
     padding: 1px 2px;
