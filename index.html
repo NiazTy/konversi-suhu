@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <section>
+        <h1 id="heading">Kalkulator Suhu</h1>
+        <p id="description">Masukan nilai suhu Celsius (°C) dibawah ini. Lalu klik tombol koversi untuk mengubah suhu ke Fahrenheit  (°F)</p>
+        <form action="" method="get" id="calc">
+            <div>
+                <label for="initialValue">Derajat Celsius</label><br>
+                <input type="text" name="initialValue" class="num" id="input">
+            </div>
+            <p>=</p>
+            <div>
+                <label for="finalValue">Derajat Fahrenheit</label><br>
+                <input type="text" name="finalValue" class="num" id="result" value="">
+            </div>
+        </form>
+        <span>
+            <button type="button" id="btn-result">Calc</button>
+            <button type="button">Reset</button>
+            <button type="button">Reverse</button>
+        </span>
+        <div id="rumus">
+            <p id="formula">Formula</p>
+            <p id="howto">(0 °C &#120; 9/5) &#43; 32 = 32 °F</p>
+        </div>
+    </section>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
