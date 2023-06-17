@@ -15,22 +15,22 @@
         <form action="" method="get" id="calc">
             <div>
                 <label for="initialValue">Derajat Celsius</label><br>
-                <input type="text" name="initialValue" class="num" id="input">
+                <input type="text" name="initialValue" id="input" value="0">
             </div>
             <p>=</p>
             <div>
                 <label for="finalValue">Derajat Fahrenheit</label><br>
-                <input type="text" name="finalValue" class="num" id="result" value="">
+                <input type="text" name="finalValue" id="result" value="">
             </div>
         </form>
         <span>
             <button type="button" id="btn-result">Calc</button>
-            <button type="button">Reset</button>
-            <button type="button">Reverse</button>
+            <button type="button" id="reset">Reset</button>
+            <button type="button" id="reverse">Reverse</button>
         </span>
         <div id="rumus">
             <p id="formula">Formula</p>
-            <p id="howto">(0 °C &#120; 9/5) &#43; 32 = 32 °F</p>
+            <p id="howto">(<span id="num">0</span> &deg;C &#120; 9/5) &#43; 32 = 32 °F</p>
         </div>
     </section>
 
