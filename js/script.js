@@ -33,7 +33,7 @@ buttonConvert.addEventListener("click", () => {
     document.getElementById("output").value = result
 
     // Mengubah isi elemen dengan ID howto sesuai dengan rumus konversi yang digunakan
-    let formula = getConvertionFormula(input, selectOne, output, selectTwo)
+    let formula = getConvertionFormula(input, selectOne, result, selectTwo)
     document.getElementById("howto").innerHTML = formula
 })
 
@@ -41,7 +41,7 @@ buttonReset.addEventListener("click", () => {
 
     // Melakukan reset ke value awal atau semula
     document.getElementById("input").value = 0
-    document.getElementById("output").value = 32
+    document.getElementById("output").value = ``
     
 })
 
@@ -239,8 +239,13 @@ function temperatureConverter(input, selectOne, selectTwo) {
     return result
 }
 
-// Fungsi untuk mendapatkan rumus konversi berdasarkan satuan asal dan tujuan
-function getConvertionFormula(input, selectOne, output, selectTwo) {
+/**
+ * 
+ * @description Fungsi untuk mendapatkan rumus konversi berdasarkan satuan asal dan tujuan
+ * @returns {Number}
+ */
+
+function getConvertionFormula(input, selectOne, result, selectTwo) {
     let formula = ""
 
     switch (selectOne) {
@@ -248,15 +253,15 @@ function getConvertionFormula(input, selectOne, output, selectTwo) {
 
             switch (selectTwo) {
                 case "Fahrenheit":
-                    formula = `(${input}°C × 9/5) + 32 = ${output}°F`
+                    formula = `(${input}°C × 9/5) + 32 = ${result}°F`
                     break;
 
                 case "Reamur":
-                    formula = `${input}°C × 4/5 = ${output}°R`
+                    formula = `${input}°C × 4/5 = ${result}°R`
                     break;
 
                 case "Kelvin":
-                    formula = `${input}°C + 273 = ${output}K`
+                    formula = `${input}°C + 273 = ${result}K`
                     break;
 
                 default:
@@ -270,15 +275,15 @@ function getConvertionFormula(input, selectOne, output, selectTwo) {
 
             switch (selectTwo) {
                 case "Celsius":
-                     formula = `(${input}°F - 32) × 5/9 = ${output}°C`
+                     formula = `(${input}°F - 32) × 5/9 = ${result}°C`
                     break;
 
                 case "Reamur":
-                    formula = `(${input}°F - 32) × 4/9 = ${output}°R`
+                    formula = `(${input}°F - 32) × 4/9 = ${result}°R`
                     break;
 
                 case "Kelvin":
-                    formula = `(${input}°F + 459.67) × 5/9 = ${output}K`
+                    formula = `(${input}°F + 459.67) × 5/9 = ${result}K`
                     break;
 
                 default:
@@ -292,15 +297,15 @@ function getConvertionFormula(input, selectOne, output, selectTwo) {
 
             switch (selectTwo) {
                 case "Celsius":
-                    formula = `${input}°R × 5/4 = ${output}°C`
+                    formula = `${input}°R × 5/4 = ${result}°C`
                     break;
 
                 case "Fahrenheit":
-                    formula = `(${input}°R × 9/4) + 32 = ${output}°F`
+                    formula = `(${input}°R × 9/4) + 32 = ${result}°F`
                     break;
 
                 case "Kelvin":
-                    formula = `(${input}°R × 5/4) + 273 = ${output}K`
+                    formula = `(${input}°R × 5/4) + 273 = ${result}K`
                     break;
 
                 default:
@@ -314,15 +319,15 @@ function getConvertionFormula(input, selectOne, output, selectTwo) {
 
             switch (selectTwo) {
                 case "Celsius":
-                    formula = `${input}K - 273.15 = ${output}°C`
+                    formula = `${input}K - 273.15 = ${result}°C`
                     break;
 
                 case "Fahrenheit":
-                    formula = `(${input}K × 9/5) - 459.67 = ${output}°F`
+                    formula = `(${input}K × 9/5) - 459.67 = ${result}°F`
                     break;
 
                 case "Reamur":
-                    formula = `(${input}K - 273.15) × 4/5 = ${output}°R`
+                    formula = `(${input}K - 273.15) × 4/5 = ${result}°R`
                     break;
 
                 default:
