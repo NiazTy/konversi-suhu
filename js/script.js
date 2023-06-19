@@ -17,20 +17,24 @@ buttonConvert.addEventListener("click", () => {
     const selectOne = document.getElementById("selection_1").value
 
     // Memanggil output dan selectTwo dari element menggunakan ID HTML
-    const output = parseFloat(document.getElementById("output").value)
+    const output = document.getElementById("output")
     const selectTwo = document.getElementById("selection_2").value
 
-    // Lihat bila satuan asal sama dengan satuan tujuan, bila iya jalankan alert
-    if (selectOne  === selectTwo) {
-        alert("Satuan asal dan tujuan tidak boleh sama!")
+    // Lakukan pengecekan jika input adalah NaN (Not a Number) maka beri tahu user
+    if (isNaN(input)) {
+        document.getElementById("error").innerHTML = `* Masukkan nilai dalam bentuk angka!`
+        return
+      // Lakukan pengecekan jika selectOne sama dengan selectTwo maka beri tahu user  
+    } else if (selectOne === selectTwo) {
+        document.getElementById("error").innerHTML = `* Satuan asal dan tujuan tidak boleh sama!`
         return
     }
 
     // Dapatkan hasil dari kalkulasi
-    let result = temperatureConverter(input, selectOne, selectTwo)
+    let result = temperatureConverter(input, selectOne, selectTwo).toFixed(2)
 
     // Pindahkan hasil kalkulasi kedalam element HTML melalui ID output
-    document.getElementById("output").value = result
+    output.value = result
 
     // Mengubah isi elemen dengan ID howto sesuai dengan rumus konversi yang digunakan
     let formula = getConvertionFormula(input, selectOne, result, selectTwo)
@@ -40,8 +44,10 @@ buttonConvert.addEventListener("click", () => {
 buttonReset.addEventListener("click", () => {
 
     // Melakukan reset ke value awal atau semula
+    output.value = 32
     document.getElementById("input").value = 0
-    document.getElementById("output").value = ``
+    document.getElementById("howto").innerHTML = `(0°C × 9/5) + 32 = 32°F`
+    document.getElementById("error").innerHTML = ``
     
 })
 
@@ -136,11 +142,10 @@ const kelvinToReamur = (kelv => {
 /**
  * 
  * @description Function yang berfungsi untuk melakukan kalkulasi pada suhu
- * @returns {Number}
  * 
  */
 
-function temperatureConverter(input, selectOne, selectTwo) {
+const temperatureConverter = (input, selectOne, selectTwo) => {
     let result
 
     switch (selectOne) {
@@ -241,11 +246,11 @@ function temperatureConverter(input, selectOne, selectTwo) {
 
 /**
  * 
- * @description Fungsi untuk mendapatkan rumus konversi berdasarkan satuan asal dan tujuan
- * @returns {Number}
+ * @description Function untuk mendapatkan rumus konversi berdasarkan satuan asal dan tujuan
+ * 
  */
 
-function getConvertionFormula(input, selectOne, result, selectTwo) {
+const getConvertionFormula = (input, selectOne, result, selectTwo) => {
     let formula = ""
 
     switch (selectOne) {
@@ -261,7 +266,7 @@ function getConvertionFormula(input, selectOne, result, selectTwo) {
                     break;
 
                 case "Kelvin":
-                    formula = `${input}°C + 273 = ${result}K`
+                    formula = `${input}°C + 273.15 = ${result}K`
                     break;
 
                 default:
@@ -305,7 +310,7 @@ function getConvertionFormula(input, selectOne, result, selectTwo) {
                     break;
 
                 case "Kelvin":
-                    formula = `(${input}°R × 5/4) + 273 = ${result}K`
+                    formula = `(${input}°R × 5/4) + 273.15 = ${result}K`
                     break;
 
                 default:
