@@ -18,6 +18,15 @@ input {
     text-align: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 p {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: medium;
@@ -73,6 +82,14 @@ p {
     padding: 1px 2px;
 }
 
+#error {
+    color: red;
+}
+
+#credit {
+    margin-top: 15px;
+}
+
 .value {
     display: flex;
 
@@ -86,6 +103,17 @@ p {
 .btn {
     background-color: transparent;
     padding: 12px 24px;
+    border-right: 4px solid black;
+    border-bottom: 4px solid black;
+    border-left: 4px solid gray;
+    border-top: 4px solid gray;
 
     cursor: pointer;
+}
+
+.btn:active  {
+    border-top: 4px solid black;
+    border-left: 4px solid black;
+    border-right: 4px solid gray;
+    border-bottom: 4px solid gray;
 }
