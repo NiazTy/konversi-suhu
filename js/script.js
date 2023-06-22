@@ -7,18 +7,23 @@
  *  
  */
 
+const output = document.getElementById("output")
+const inputElement = document.getElementById("input")
+const selectOneElement = document.getElementById("selection_1")
+const selectTwoElement = document.getElementById("selection_2")
 const buttonConvert = document.getElementById("result")
 const buttonReset = document.getElementById("reset")
+const howto = document.getElementById("howto")
+const error = document.getElementById("error")
 
 buttonConvert.addEventListener("click", () => {
     
     // Memanggil input dan selectOne dari element menggunakan ID HTML
-    const input = parseFloat(document.getElementById("input").value)
-    const selectOne = document.getElementById("selection_1").value
+    const input = parseFloat(inputElement.value)
+    const selectOne = selectOneElement.value
 
-    // Memanggil output dan selectTwo dari element menggunakan ID HTML
-    const output = document.getElementById("output")
-    const selectTwo = document.getElementById("selection_2").value
+    // Memanggil selectTwo dari element menggunakan ID HTML
+    const selectTwo = selectTwoElement.value
 
     // Lakukan pengecekan jika input adalah NaN (Not a Number) maka beri tahu user
     if (isNaN(input)) {
@@ -26,9 +31,11 @@ buttonConvert.addEventListener("click", () => {
         return
       // Lakukan pengecekan jika selectOne sama dengan selectTwo maka beri tahu user  
     } else if (selectOne === selectTwo) {
-        document.getElementById("error").innerHTML = `* Satuan asal dan tujuan tidak boleh sama!`
+        error.innerHTML = `* Satuan asal dan tujuan tidak boleh sama!`
         return
     }
+
+    error.innerHTML = ``
 
     // Dapatkan hasil dari kalkulasi
     let result = temperatureConverter(input, selectOne, selectTwo).toFixed(2)
@@ -44,99 +51,12 @@ buttonConvert.addEventListener("click", () => {
 buttonReset.addEventListener("click", () => {
 
     // Melakukan reset ke value awal atau semula
-    output.value = 32
-    document.getElementById("input").value = 0
-    document.getElementById("howto").innerHTML = `(0°C × 9/5) + 32 = 32°F`
-    document.getElementById("error").innerHTML = ``
-    
-})
-
-/**
- * 
- * @description Kalkulasi celsius ke Fahrenheit, Reamur, dan Kelvin
- * @returns {Number}
- * 
- */
-
-const celsiusToFahrenheit = (cel => {
-    let fahrenheit = (cel * 9/5) + 32
-    return fahrenheit
-})
-
-const celsiusToReamur = (cel => {
-    let reamur = (cel * 4/5)
-    return reamur
-})
-
-const celsiusToKelvin = (cel => {
-    let kelvin = (cel + 273.15)
-    return kelvin
-})
-
-/**
- * 
- * @description Kalkulasi Fahrenheit ke celsius, Reamur, dan Kelvin
- * @returns {Number}
- * 
- */
-
-const fahrenheitToCelsius = (fah => {
-    let celsius = (fah - 32) * 5/9
-    return celsius
-})
-
-const fahrenheitToReamur = (fah => {
-    let reamur = (fah * - 32) * 4/9
-    return reamur
-})
-
-const fahrenheitToKelvin = (fah => {
-    let kelvin = 5/9 * (fah - 32) + 273.15
-    return kelvin
-})
-
-/**
- * 
- * @description Kalkulasi Reamur ke celsius, Fahrenheit, dan Kelvin
- * @returns {Number}
- * 
- */
-
-const reamurToCelsius = (rea => {
-    let celsius = (5/4 * rea)
-    return celsius
-})
-
-const reamurToFahrenheit = (rea => {
-    let fahrenheit = (9/4 * rea) + 32
-    return fahrenheit
-})
-
-const reamurToKelvin = (rea => {
-    let kelvin = (5/4 * rea) + 273.15
-    return kelvin
-})
-
-/**
- * 
- * @description Kalkulasi Kelvin ke celsius, Fahrenheit, dan Reamur
- * @returns {Number}
- * 
- */
-
-const kelvinToCelsius = (kelv => {
-    let celsius = kelv - 273.15
-    return celsius
-})
-
-const kelvinToFahrenheit = (kelv => {
-    let fahrenheit = 9/5 * (kelv - 273.15) + 32
-    return fahrenheit
-})
-
-const kelvinToReamur = (kelv => {
-    let reamur = 4/5 * (kelv - 273.15)
-    return reamur
+    error.innerHTML = ``
+    inputElement.value = 0
+    output.value = `32.00`
+    howto.innerHTML = `(0°C × 9/5) + 32 = 32.00°F`
+    selectOneElement.options[0].selected = true
+    selectTwoElement.options[1].selected = true
 })
 
 /**
@@ -153,19 +73,15 @@ const temperatureConverter = (input, selectOne, selectTwo) => {
 
             switch (selectTwo) {
                 case "Fahrenheit":
-                    result = celsiusToFahrenheit(input)
+                    result = (input * 9/5) + 32
                     break;
 
                 case "Reamur":
-                    result = celsiusToReamur(input)
+                    result = (input * 4/5)
                     break;
 
                 case "Kelvin":
-                    result = celsiusToKelvin(input)
-                    break;
-
-                default:
-                    result = "error"
+                    result = (input + 273.15)
                     break;
             }
 
@@ -175,19 +91,15 @@ const temperatureConverter = (input, selectOne, selectTwo) => {
 
             switch (selectTwo) {
                 case "Celsius":
-                    result = fahrenheitToCelsius(input)
+                    result = (input - 32) * 5/9
                     break;
 
                 case "Reamur":
-                    result = fahrenheitToReamur(input)
+                    result = (input * - 32) * 4/9
                     break;
 
                 case "Kelvin":
-                    result = fahrenheitToKelvin(input)
-                    break;
-
-                default:
-                    result = "error"
+                    result = (input - 32) * 5/9  + 273.15
                     break;
             }
 
@@ -197,19 +109,15 @@ const temperatureConverter = (input, selectOne, selectTwo) => {
 
             switch (selectTwo) {
                 case "Celsius":
-                    result = reamurToCelsius(input)
+                    result = (5/4 * input)
                     break;
 
                 case "Fahrenheit":
-                    result = reamurToFahrenheit(input)
+                    result = (9/4 * input) + 32
                     break;
 
                 case "Kelvin":
-                    result = reamurToKelvin(input)
-                    break;
-
-                default:
-                    result = "error"
+                    result = (5/4 * input) + 273.15
                     break;
             }
 
@@ -219,25 +127,18 @@ const temperatureConverter = (input, selectOne, selectTwo) => {
 
             switch (selectTwo) {
                 case "Celsius":
-                    result = kelvinToCelsius(input)
+                    result = input - 273.15
                     break;
 
                 case "Fahrenheit":
-                    result = kelvinToFahrenheit(input)
+                    result = 9/5 * (input - 273.15) + 32
                     break;
 
                 case "Reamur":
-                    result = kelvinToReamur(input)
-                    break;
-
-                default:
-                    result = "error"
+                    result =  4/5 * (input - 273.15)
                     break;
             }
 
-            break;
-    
-        default:
             break;
     }
 
@@ -266,11 +167,7 @@ const getConvertionFormula = (input, selectOne, result, selectTwo) => {
                     break;
 
                 case "Kelvin":
-                    formula = `${input}°C + 273.15 = ${result}K`
-                    break;
-
-                default:
-                    formula = "error"
+                    formula = `${input}°C + 273.15 = ${result}°K`
                     break;
             }
 
@@ -288,11 +185,7 @@ const getConvertionFormula = (input, selectOne, result, selectTwo) => {
                     break;
 
                 case "Kelvin":
-                    formula = `(${input}°F + 459.67) × 5/9 = ${result}K`
-                    break;
-
-                default:
-                    formula = "error"
+                    formula = `(${input}°F + 459.67) × 5/9 = ${result}°K`
                     break;
             }
 
@@ -310,11 +203,7 @@ const getConvertionFormula = (input, selectOne, result, selectTwo) => {
                     break;
 
                 case "Kelvin":
-                    formula = `(${input}°R × 5/4) + 273.15 = ${result}K`
-                    break;
-
-                default:
-                    formula = "error"
+                    formula = `(${input}°R × 5/4) + 273.15 = ${result}°K`
                     break;
             }
 
@@ -334,15 +223,8 @@ const getConvertionFormula = (input, selectOne, result, selectTwo) => {
                 case "Reamur":
                     formula = `(${input}K - 273.15) × 4/5 = ${result}°R`
                     break;
-
-                default:
-                    formula = "error"
-                    break;
             }
 
-            break;
-    
-        default:
             break;
     }
 
