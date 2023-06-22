@@ -44,7 +44,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: calc(1280px - 25%);
+    width: calc(1080px - 25%);
     height: 100vh;
 }
 
